@@ -24,21 +24,21 @@ const ImageCard = ({ image, index, moveImage }) => {
 
   return (
     <div
-      ref={(node) => drag(drop(node))}
-      style={{ opacity }}
-      className="max-w-sm rounded overflow-hidden shadow-lg"
-    >
+    ref={(node) => drag(drop(node))}
+    style={{ opacity }}
+    className="max-w-sm rounded overflow-hidden shadow-lg hover:shadow-xl transition-transform transform hover:scale-105"
+  >
       <img src={image.webformatURL} alt="" className="w-full" />
       <div className="px-6 py-4">
         <div className="font-bold text-teal-500 text-xl mb-2">
           Photo by {image.user}
         </div>
-        <ul>
+        {/* <ul>
           <li>
             <strong>Likes: </strong>
             {image.likes}
           </li>
-        </ul>
+        </ul> */}
       </div>
       <div className="px-6 py-4">
         {image.tags.split(',').map((tag, index) => (

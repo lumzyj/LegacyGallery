@@ -11,7 +11,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --primary-color: teal;
+  --secondary-color: #ff5722;
+}
+
+/* Use the color theme in your component */
+.text-teal {
+  color: var(--primary-color);
 }
