@@ -4,11 +4,15 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import ImageCard from './ImageCard.js';
 import ImageSearch from './ImageSearch.js';
 import { Waveform } from '@uiball/loaders';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from 'firebase/auth'; // Import Firebase auth methods and auth instance
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [term, setTerm] = useState('');
+  const navigate = useNavigate();
+  const auth = getAuth(); // Get Firebase auth instance
 
   useEffect(() => {
     fetch(`https://pixabay.com/api/?key=${process.env.REACT_APP_PIXABAY_API_KEY}&q=${term}&image_type=photo&pretty=true`)
@@ -30,11 +34,28 @@ const Gallery = () => {
   
     setImages(newImages);
   };
-  
+
+  const handleLogout = () => {
+    // Sign out the user using Firebase Authentication
+    signOut(auth)
+      .then(() => {
+        // Redirect to the login page after successful logout
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error('Error during logout:', error);
+      });
+  };
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="container mx-auto p-4">
+        <div className="flex justify-end">
+          <button onClick={handleLogout} className="bg-teal-200 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded">
+            Logout
+          </button>
+        </div>
+
         <ImageSearch searchText={(text) => setTerm(text)} />
 
         {isLoading ? (
@@ -56,4 +77,5 @@ const Gallery = () => {
 };
 
 export default Gallery;
+
 
