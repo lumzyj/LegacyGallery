@@ -24,7 +24,7 @@ export default function SignUpForm() {
         position: 'top-center',
         autoClose: 3000,
       });
-      navigate('/'); // Redirect to the homepage or any desired page
+      navigate('/login'); // Redirect to the homepage or any desired page
     } catch (error) {
       console.error('Error signing up:', error);
       // Show an error toast notification for sign-up failure
@@ -94,7 +94,7 @@ export default function SignUpForm() {
         <div className='mt-8 flex justify-center items-center'>
           <p className='font-medium text-base'>Already have an account?</p>
           <Link
-            to='/'
+            to='/login'
             className='text-teal-500 text-base font-medium ml-2'
             type='submit'
           >
